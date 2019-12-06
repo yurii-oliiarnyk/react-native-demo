@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Button, TextInput, Alert } from 'react-native';
+import { View, StyleSheet, TextInput, Alert, Keyboard } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 import { THEME } from '../theme';
 
 const AddTodo = props => {
@@ -11,6 +12,7 @@ const AddTodo = props => {
     if (value.trim()) {
       onSubmit(value);
       setValue('');
+      Keyboard.dismiss();
     } else {
       Alert.alert('Поле пусте');
     }
@@ -24,7 +26,9 @@ const AddTodo = props => {
         onChangeText={setValue}
         placeholder="Введіть назву справи..."
       />
-      <Button title="Добавити" onPress={() => pressHandler()} color={THEME.MAIN_COLOR} />
+      <AntDesign.Button onPress={() => pressHandler()} name="pluscircleo">
+        Добавити
+      </AntDesign.Button>
     </View>
   );
 };
@@ -37,13 +41,12 @@ const styles = StyleSheet.create({
     marginBottom: 15
   },
   input: {
-    width: '70%',
+    width: '60%',
     padding: 10,
     borderStyle: 'solid',
     borderBottomWidth: 2,
     borderBottomColor: THEME.MAIN_COLOR
-  },
-  button: {}
+  }
 });
 
 export default AddTodo;

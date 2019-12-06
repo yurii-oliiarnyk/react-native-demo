@@ -21,7 +21,7 @@ const TodoList = props => {
 
 const styles = StyleSheet.create({
   emptyList: {
-    height: 300,
+    height: 200,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 15
