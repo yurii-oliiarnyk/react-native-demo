@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Button, TextInput, Alert } from 'react-native';
+import { THEME } from '../theme';
 
 const AddTodo = props => {
   const { onSubmit } = props;
@@ -23,7 +24,7 @@ const AddTodo = props => {
         onChangeText={setValue}
         placeholder="Введіть назву справи..."
       />
-      <Button title="Добавити" onPress={() => pressHandler()} />
+      <Button title="Добавити" onPress={() => pressHandler()} color={THEME.MAIN_COLOR} />
     </View>
   );
 };
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderStyle: 'solid',
     borderBottomWidth: 2,
-    borderBottomColor: '#3949ab'
+    borderBottomColor: THEME.MAIN_COLOR
   },
   button: {}
 });

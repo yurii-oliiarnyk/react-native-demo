@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Alert } from 'react-native';
 import MainScreen from './src/screens/MainScreen';
 import Navbar from './src/components/Navbar';
 import TodoScreen from './src/screens/TodoScreen';
@@ -15,7 +15,7 @@ export default function App() {
       title: 'Написати пет-проект'
     }
   ]);
-  const [todoId, setTodoId] = useState(null);
+  const [todoId, setTodoId] = useState('2');
 
   const addTodo = title => {
     const newTodo = {
@@ -26,8 +26,36 @@ export default function App() {
     setTodos(prev => [newTodo, ...prev]);
   };
 
+  const updateTodo = (id, title) => {
+    setTodos(prev =>
+      prev.map(todo => {
+        if (todo.id === id) {
+          todo.title = title;
+        }
+
+        return todo;
+      })
+    );
+  };
+
   const removeTodo = id => {
-    setTodos(prev => prev.filter(todo => todo.id !== id));
+    const todo = todos.find(todo => todo.id === id);
+
+    Alert.alert(
+      'Видалення',
+      `Ви впевнені, що хочете видалити "${todo.title}"?`,
+      [
+        { text: 'Відмінити', style: 'cancel' },
+        {
+          text: 'Видалити',
+          onPress: () => {
+            setTodoId(null);
+            setTodos(prev => prev.filter(todo => todo.id !== id));
+          }
+        }
+      ],
+      { cancelable: true }
+    );
   };
 
   return (
@@ -46,6 +74,8 @@ export default function App() {
           <TodoScreen
             goBack={() => setTodoId(null)}
             todo={todos.find(todo => todo.id === todoId)}
+            removeTodo={removeTodo}
+            updateTodo={updateTodo}
           />
         )}
       </View>
