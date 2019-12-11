@@ -1,15 +1,31 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Dimensions } from 'react-native';
 import AddTodo from '../components/AddTodo';
 import TodoList from '../components/TodoList';
 
 const MainScreen = props => {
   const { todos, removeTodo, addTodo, openTodo } = props;
+  const [maxWidth, setMaxWidth] = useState(Dimensions.get('window').width);
+
+  useEffect(() => {
+    const update = () => {
+      const width = Dimensions.get('window').width;
+      setMaxWidth(width);
+    };
+
+    Dimensions.addEventListener('change', update);
+
+    return () => {
+      Dimensions.removeEventListener('change', update);
+    };
+  });
 
   return (
     <View>
       <AddTodo onSubmit={addTodo} />
-      <TodoList todos={todos} onRemove={removeTodo} onOpen={openTodo} />
+      <View style={{ maxWidth }}>
+        <TodoList todos={todos} onRemove={removeTodo} onOpen={openTodo} />
+      </View>
     </View>
   );
 };
