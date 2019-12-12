@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet, Modal, Alert } from 'react-native';
+import { View, TextInput, StyleSheet, Modal, Alert } from 'react-native';
 import AppButton from '../components/ui/AppButton';
 import { THEME } from '../theme';
 
@@ -11,7 +11,9 @@ const EditModal = props => {
     if (title.trim().length < 3) {
       Alert.alert(
         'Помилка',
-        `Мінімальна кількість 3 символів. Зараз ${title.trim().length} символів.`
+        `Мінімальна кількість 3 символів. Зараз ${
+          title.trim().length
+        } символів.`
       );
     } else {
       onCancel();
@@ -19,8 +21,18 @@ const EditModal = props => {
     }
   };
 
+  const cancelHandler = () => {
+    setTitle(value);
+    onCancel();
+  };
+
   return (
-    <Modal visible={visible} animationType="fade" transparent={false} presentationStyle="formSheet">
+    <Modal
+      visible={visible}
+      animationType="fade"
+      transparent={false}
+      presentationStyle="formSheet"
+    >
       <View style={styles.wrap}>
         <TextInput
           style={styles.input}
@@ -30,7 +42,7 @@ const EditModal = props => {
         />
         <View style={styles.buttons}>
           <View style={styles.button}>
-            <AppButton onPress={() => onCancel()} color={THEME.DANGER_COLOR}>
+            <AppButton onPress={cancelHandler} color={THEME.DANGER_COLOR}>
               Відмінити
             </AppButton>
           </View>

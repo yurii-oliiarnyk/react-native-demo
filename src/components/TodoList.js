@@ -3,16 +3,19 @@ import { FlatList, View, Image, StyleSheet } from 'react-native';
 import TodoItem from './TodoItem';
 
 const TodoList = props => {
-  const { todos, onRemove, onOpen } = props;
+  const { todos } = props;
 
   return (
     <FlatList
       data={todos}
       keyExtractor={item => item.id}
-      renderItem={({ item }) => <TodoItem {...item} onRemove={onRemove} onOpen={onOpen} />}
+      renderItem={({ item }) => <TodoItem {...item} />}
       ListEmptyComponent={
         <View style={styles.emptyList}>
-          <Image style={styles.image} source={require('../assets/images/no-items.png')} />
+          <Image
+            style={styles.image}
+            source={require('../assets/images/no-items.png')}
+          />
         </View>
       }
     />

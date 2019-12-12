@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
 import AddTodo from '../components/AddTodo';
 import TodoList from '../components/TodoList';
+import TodoContext from '../context/todo/todoContext';
 
-const MainScreen = props => {
-  const { todos, removeTodo, addTodo, openTodo } = props;
+const MainScreen = () => {
+  const todosContext = useContext(TodoContext);
+  const { todos } = todosContext;
   const [maxWidth, setMaxWidth] = useState(Dimensions.get('window').width);
 
   useEffect(() => {
@@ -22,9 +24,9 @@ const MainScreen = props => {
 
   return (
     <View>
-      <AddTodo onSubmit={addTodo} />
+      <AddTodo />
       <View style={{ maxWidth }}>
-        <TodoList todos={todos} onRemove={removeTodo} onOpen={openTodo} />
+        <TodoList todos={todos} />
       </View>
     </View>
   );

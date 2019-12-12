@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, StyleSheet, TextInput, Alert, Keyboard } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { THEME } from '../theme';
+import TodoContext from '../context/todo/todoContext';
 
-const AddTodo = props => {
-  const { onSubmit } = props;
-
+const AddTodo = () => {
+  const { addTodo } = useContext(TodoContext);
   const [value, setValue] = useState('');
 
   const pressHandler = () => {
     if (value.trim()) {
-      onSubmit(value);
+      addTodo(value);
       setValue('');
       Keyboard.dismiss();
     } else {
