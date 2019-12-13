@@ -14,9 +14,13 @@ const MainLayout = props => {
 };
 
 const styles = StyleSheet.create({
+  app: {
+    flex: 1
+  },
   container: {
     paddingHorizontal: 30,
-    paddingVertical: 20
+    paddingVertical: 20,
+    flex: 1
   }
 });
 

@@ -15,8 +15,8 @@ const TodoScreen = () => {
   const { todoId, changeScreen } = useContext(ScreenContext);
   const todo = todos.find(todo => todo.id === todoId);
 
-  const saveHandler = title => {
-    updateTodo(todo.id, title);
+  const saveHandler = async title => {
+    await updateTodo(todo.id, title);
     setModalVisible(false);
   };
 

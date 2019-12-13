@@ -1,9 +1,7 @@
 import React, { useContext } from 'react';
 import MainLayout from './layouts/MainLayout';
-
 import MainScreen from './screens/MainScreen';
 import TodoScreen from './screens/TodoScreen';
-import TodoContext from './context/todo/todoContext';
 import ScreenContext from './context/screen/screenContext';
 
 const Root = () => {

@@ -1,13 +1,36 @@
-import { ADD_TODO, REMOVE_TODO, UPDATE_TODO } from '../types';
+import {
+  ADD_TODO,
+  REMOVE_TODO,
+  UPDATE_TODO,
+  FETCH_TODOS_LOADING,
+  FETCH_TODOS_ERROR,
+  FETCH_TODOS_LOADED
+} from '../types';
 
 const handlers = {
-  [ADD_TODO]: (state, payload) => ({
+  [FETCH_TODOS_LOADING]: state => ({
+    ...state,
+    error: null,
+    loading: true
+  }),
+  [FETCH_TODOS_ERROR]: (state, payload) => ({
+    ...state,
+    loading: false,
+    error: payload
+  }),
+  [FETCH_TODOS_LOADED]: (state, payload) => ({
+    ...state,
+    loading: false,
+    error: null,
+    todos: payload
+  }),
+  [ADD_TODO]: (state, { id, title }) => ({
     ...state,
     todos: [
       ...state.todos,
       {
-        id: Date.now().toString(),
-        title: payload
+        id,
+        title
       }
     ]
   }),
